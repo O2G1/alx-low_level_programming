@@ -1,59 +1,34 @@
+#include <stdlib.h>
+#include <time.h>
 #include <stdio.h>
 
-<<<<<<< HEAD
 /**
-* main - print alphabet
+* main - Check  last digit of a number
 *
-* Return: Always 0 (Sucess)
+* Return: Always 0 (Success)
 */
 
 int main(void)
 {
-	char c;
+	int n;
+	int m;
 
-	for (c = 'a'; c <= 'z'; c++)
+	srand(time(0));
+	n = rand() - RAND_MAX / 2;
+	m = n % 10;
+
+	if (m > 5 )
 	{
-		putchar(c);
+		printf("Last digit of %d is %d and is greater than 5\n", n, m);
 	}
-	putchar('\n');
+	else if (m == 0)
+	{
+		printf("Last digit of %d is %d and 0\n", n, m);
+	}
+	else 
+	{
+		printf("Last digit of %d is %d and is less than 6 and not 0\n", n, m);
+	}
 
 	return (0);
-=======
-
-
-/**
- *
- *  * main - print alphabet
- *
- *   *
- *
- *    * Return: Always 0 (Success)
- *
- *     */
-
-
-
-int main(void)
-
-{
-
-		char c;
-
-
-
-			for (c = 'a'; c <= 'z'; c++)
-
-					{
-
-								putchar(c);
-
-									}
-
-				putchar('\n');
-
-
-
-					return (0);
-
->>>>>>> f0fee5bacdcf102ad4adb2e4a9c726522e2f9245
 }
