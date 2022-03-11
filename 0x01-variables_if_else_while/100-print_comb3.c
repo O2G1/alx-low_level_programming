@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 /**
- * main - print different combinations of two-digit numbers
+ * main - print different combinations of two digits
  *
  * Return: Always 0 (success)
  *
@@ -14,18 +14,18 @@ int main(void)
 
 	for (n = 48; n <= 57; n++)
 	{
-		for (m = 48; m <= 57; m++)
+		for (m = n + 1; m <= 57; m++)
 		{
 			putchar(n);
 			putchar(m);
-			if (n != 57 || m != 57)
+			if (n != 56)
 			{
-				putchar(',');
-				putchar(' ');
+				putchar(44);
+				putchar(32);
 			}
 		}
 	}
-	putchar('\n');
-
+	putchar(10);
+	
 	return (0);
 }
