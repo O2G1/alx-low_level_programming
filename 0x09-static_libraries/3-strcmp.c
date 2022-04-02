@@ -1,33 +1,19 @@
 #include "main.h"
 
 /**
- * _strspn - Entry point
- * @s: input
- * @accept: input
+ * _strcmp - a function that compares two strings
+ * @s1: input one
+ * @s2: input two
  * Return: Always 0 (Success)
  */
-unsigned int _strspn(char *s, char *accept)
+int _strcmp(char *s1, char *s2)
 {
-	unsigned int i, n, value, check;
+	int i;
 
-	value = 0;
-
-	for (i = 0; s[i] != '\0'; i++)
+	for (i = 0; s1[i] != '\0' && s2[i] != '\0'; i++)
 	{
-		check = 0;
-
-		for (n = 0; accept[n] != '\0'; n++)
-		{
-			if (accept[n] == s[i])
-			{
-				value++;
-				check = 1;
-			}
-		}
-
-		if (check == 0)
-			return (value);
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
 	}
-
-	return (value);
+	return (0);
 }
