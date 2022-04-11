@@ -1,14 +1,18 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "dog.h"
+#include <stdio.h>
+#include <stdlib.h>
+
 /**
- * free_dog - Entry Point
- * @d: struct to free
- * Return: 0
- */
+  * free_dog - fills memory with a constant byte
+  * @d: is the pointer of the strut
+  * Return: a void pointer
+  */
 void free_dog(dog_t *d)
 {
-	if (d == NULL)
-		return;
-	free(d);
+	if (d != NULL)
+	{
+		free(d->name);
+		free(d->owner);
+		free(d);
+	}
 }

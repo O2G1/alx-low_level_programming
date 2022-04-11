@@ -1,53 +1,48 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "dog.h"
-int get_len(int i);
-char *str_cpy(char *dest, char *src);
+#include <stdio.h>
+#include <stdlib.h>
+
 /**
- * new_dog - a function that creates a new dog
- * get len of name + owner, malloc them, cpy name + owner to new
- * @name: name
- * @age: age
- * @owner: owner
- * Return: 0
- */
+  * new_dog - fills memory with a constant byte
+  * @name: is the name of the dog
+  * @age: is the age of the dog
+  * @owner: is the owner of the dog
+  * Return: a void pointer
+  */
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	dog_t *new_name;
-	char *copy_name, *copy_owner;
-	unsigned int x, name_len = 0, owner_len = 0;
+	int cont1, cont2, cont3;
+	char *sname, *sowner;
+	dog_t *ndog;
 
-	new_name = malloc(sizeof(dog_t));
-	if (name == NULL)
+	ndog = malloc(sizeof(dog_t));
+	if (ndog == NULL)
 		return (NULL);
-	if (name == NULL || age <= 0 || owner == NULL)
+	for (cont1 = 0; name[cont1] != '\0'; cont1++)
+		;
+	for (cont2 = 0; owner[cont2] != '\0'; cont2++)
+		;
+	sname = malloc(sizeof(char) * cont1 + 1);
+	if (sname == NULL)
 	{
-		free(new_name);
+		free(ndog);
 		return (NULL);
 	}
 
-	for (x = 0; name[x] != '\0'; x++)
-		name_len++;
+	for (cont3 = 0; cont3 <= cont1; cont3++)
+		sname[cont3] = name[cont3];
 
-	for (x = 0; owner[x] != '\0'; x++)
-		owner_len++;
-
-	copy_name = malloc(sizeof(char) * (name_len + 1));
-	if (copy_name == NULL)
+	sowner = malloc(sizeof(char) * cont2 + 1);
+	if (sowner == NULL)
+	{
+		free(ndog);
+		free(sname);
 		return (NULL);
-
-	copy_owner = malloc(sizeof(char) * (owner_len + 1));
-	if (copy_owner == NULL)
-		return (NULL);
-
-	for (x = 0; x <= name_len; x++)
-		copy_name[x] = name[x];
-
-	for (x = 0; x <= owner_len; x++)
-		copy_owner[x] = owner[x];
-
-	new_name->name = copy_name;
-	new_name->owner = copy_owner;
-	new_name->age = age;
-	return (new_name);
+	}
+	for (cont3 = 0; cont3 <= cont2; cont3++)
+		sowner[cont3] = owner[cont3];
+	ndog->name = sname;
+	ndog->age = age;
+	ndog->owner = sowner;
+	return (ndog);
 }
