@@ -1,73 +1,64 @@
 #include "search_algos.h"
 
-/**
-  * print_array - print array with limits in l and r
-  * @array: set of numbers
-  * @l: left limit
-  * @r: right limit
-  * Return: nothing
-  */
-void print_array(int *array, size_t l, size_t r)
-{
-	printf("Searching in array: ");
-	for (l = l; l < r; l++)
-		printf("%d, ", array[l]);
-	printf("%d\n", array[l]);
-}
+void print_searched(int *array, size_t left, size_t right);
+int recursive_binary(int *array, size_t left, size_t right, int val);
 
 /**
-  * bi_se - search the first ocurrency of a value in the array recursively
-  * @array: set of numbers
-  * @l: left limit
-  * @r: right limit
-  * @value: value to search
-  * Return: return the first index located otherwise -1
-  */
-size_t bi_se(int *array, size_t l, size_t r, int value)
-{
-	int mid = 0, index = -1;
-
-	if (l > r)
-		return (-1);
-
-	print_array(array, l, r);
-	mid = (l + r) / 2;
-	if (array[mid] < value)
-	{
-		l = mid + 1;
-		index = bi_se(array, l, r, value);
-	}
-	else if (array[mid] > value)
-	{
-		r = mid - 1;
-		index = bi_se(array, l, r, value);
-	}
-	else
-		if (mid - 1 >= 0 && array[mid - 1] == array[mid])
-			index = bi_se(array, l, mid, value);
-		else
-			index = mid;
-
-	return (index);
-}
-
-/**
-  * advanced_binary - search the first ocurrency of a value in the array
-  * @array: set of numbers
-  * @size: size of the array
-  * @value: value to search
-  * Return: return the first index located otherwise -1
-  */
+ * advanced_binary - Advanced Binary search implemented
+ * @array: Pointer at the first element of an array of integers
+ * @size: Size of the array
+ * @value: Search value in the array
+ * Return: Integer with the index of the searched value or -1
+ */
 int advanced_binary(int *array, size_t size, int value)
 {
-	int index = -1;
-
 	if (array == NULL || size == 0)
 		return (-1);
 
-	index = bi_se(array, 0, size - 1, value);
+	return (recursive_binary(array, 0, size - 1, value));
+}
 
-	if (index >= 0)
-		return (index);
+/**
+ * recursive_binary - Binary search implemented
+ * @array: Pointer at the first element of an array of integers
+ * @left: Index to the left in the array
+ * @right: Index in the right in the array
+ * @value: Search value in the array
+ * Return: Integer with the index of the searched value or -1
+ */
+int recursive_binary(int *array, size_t left, size_t right, int value)
+{
+	size_t mid;
+
+	if (left <= right)
+	{
+		mid = left + (right - left) / 2;
+		print_searched(array, left, right);
+		if (array[mid] == value && (mid == left || array[mid - 1] != value))
+			return (mid);
+		if (array[mid] < value)
+			return (recursive_binary(array, mid + 1, right, value));
+		return (recursive_binary(array, left, mid, value));
+	}
 	return (-1);
+}
+
+/**
+ * print_searched - Print elements of given array
+ * @array: Pointer at the first element of an array of integers
+ * @left: Pointer to the left index
+ * @right: Pointer to the right index
+ */
+void print_searched(int *array, size_t left, size_t right)
+{
+	size_t i;
+	char *comma = "";
+
+	printf("Searching in array: ");
+	for (i = left; i <= right; i++)
+	{
+		printf("%s%d", comma, array[i]);
+		comma = ", ";
+	}
+	printf("\n");
 }
